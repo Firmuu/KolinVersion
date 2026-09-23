@@ -490,7 +490,32 @@ transition:border-color .2s,filter .2s}
 .card p a:hover,.info-box a:hover,.notice a:hover{
 border-bottom-color:var(--accent);filter:drop-shadow(0 0 6px var(--accent-glow))}
 
-/* === DONATE CARD (НОВЫЙ) === */
+/* SERVER CARD */
+.server-card{background:var(--bg-1);border:1px solid var(--border);border-radius:var(--radius);
+padding:22px;transition:all var(--transition);position:relative;overflow:hidden;
+box-shadow:0 1px 0 rgba(255,255,255,0.02),0 2px 8px rgba(0,0,0,0.15)}
+html[data-theme="light"] .server-card{background:#fff;border-color:#e6e2da;
+box-shadow:0 1px 2px rgba(28,25,23,0.04),0 2px 8px rgba(28,25,23,0.03)}
+.server-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;
+background:linear-gradient(90deg,var(--accent),transparent);
+transform:scaleX(0);transform-origin:left;transition:transform .3s}
+.server-card:hover{border-color:var(--accent-border);background:var(--bg-2);transform:translateY(-2px);
+box-shadow:0 1px 0 rgba(255,255,255,0.04),0 12px 48px rgba(0,0,0,0.4),
+0 0 0 1px var(--accent-border),0 0 30px -10px var(--accent-glow)}
+html[data-theme="light"] .server-card:hover{background:#fff;
+box-shadow:0 4px 12px rgba(28,25,23,0.06),0 12px 40px rgba(var(--accent-rgb),0.10),0 0 0 1px var(--accent-border)}
+.server-card:hover::before{transform:scaleX(1)}
+.server-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:14px}
+.server-name{font-size:16px;font-weight:700;color:var(--text);letter-spacing:-.01em}
+html[data-theme="light"] .server-name{color:#0c0a09}
+.server-badge{display:inline-flex;align-items:center;gap:6px;padding:3px 10px;
+border-radius:100px;font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.05em;
+background:var(--accent-soft);color:var(--accent-2);border:1px solid var(--accent-border)}
+html[data-theme="light"] .server-badge{color:var(--accent-3)}
+.server-badge::before{content:'';width:6px;height:6px;border-radius:50%;background:currentColor;
+box-shadow:0 0 8px currentColor}
+
+/* === DONATE CARD === */
 .donate-card{background:var(--bg-1);border:1px solid var(--border);border-radius:var(--radius);
 padding:24px 22px 20px;transition:all var(--transition);position:relative;overflow:hidden;
 display:flex;flex-direction:column;
@@ -550,7 +575,7 @@ html[data-theme="light"] .donate-duration{color:var(--accent-3)}
 .donate-monthly{font-size:12.5px;color:var(--text-3);font-weight:500}
 .donate-monthly b{color:var(--text-2);font-weight:700;font-family:var(--mono)}
 
-/* === FAQ (НОВЫЙ) === */
+/* === FAQ === */
 .faq-item{background:var(--bg-1);border:1px solid var(--border);border-radius:var(--radius);
 margin-bottom:12px;overflow:hidden;transition:all var(--transition)}
 html[data-theme="light"] .faq-item{background:#fff;border-color:#e6e2da;
@@ -1057,7 +1082,7 @@ body::before,body::after,.bg-particles span,.bg-hexagons svg,
 </a>
 </div>
 </nav>
-<div class="sidebar__footer"><span>v1.2.0</span><span class="status-dot"></span></div>
+<div class="sidebar__footer"><span>v1.2.1</span><span class="status-dot"></span></div>
 </aside>
 
 <div class="main">
@@ -1694,6 +1719,7 @@ Boosty: https://boosty.to/kolinsl
 <!-- RULES NoRules -->
 <section class="page" id="page-rules-norules">
 <div class="hero"><span class="hero-badge">Правила · NoRules</span><h1>Правила <em>KL | NoRules</em></h1><p>Свод правил для игроков и администрации сервера NoRules.</p></div>
+<div class="notice"><span class="notice-icon">i</span><div>Заходя на сервер, вы автоматически соглашаетесь с правилами.</div></div>
 <h3 class="subhead">Общие правила</h3>
 <div class="rows">
 <div class="row"><div class="row-num">1.0</div><div class="row-body"><strong>Запрещено использовать ПО или читы, упрощающие игру</strong><span class="row-pen">Пожизненный бан</span></div></div>
@@ -1717,7 +1743,7 @@ Boosty: https://boosty.to/kolinsl
 <div class="row"><div class="row-num">3.2</div><div class="row-body"><strong>Запрещено препятствовать работе администрации</strong><span class="row-pen">Бан на 5 часов</span></div></div>
 <div class="row"><div class="row-num">3.3</div><div class="row-body"><strong>Запрещено вводить администрацию в заблуждение</strong><span class="row-pen">Утраивается (Х3)</span></div></div>
 </div>
-<div class="notice"><span class="notice-icon">!</span><div><b>Помните!</b> Администратор может повышать срок бана в зависимости от ситуации.</div></div>
+<div class="notice danger"><span class="notice-icon">!</span><div><b>Важно!</b> Администрация может вынести наказание <b>даже при отсутствии прямого пункта правил</b>, если сочтёт ваши действия деструктивными, направленными на ухудшение игрового процесса или вредительство проекту. Наличие правил не ограничивает администрацию в защите интересов сервера и сообщества.</div></div>
 <h3 class="subhead">Правила администрации NoRules</h3>
 <div class="rows">
 <div class="row"><div class="row-num">1</div><div class="row-body"><strong>Запрещен админ-абуз</strong><span class="row-pen">от 1 преда до снятия</span></div></div>
@@ -1745,6 +1771,7 @@ Boosty: https://boosty.to/kolinsl
 <!-- RULES Classic -->
 <section class="page" id="page-rules-classic">
 <div class="hero"><span class="hero-badge">Правила · Classic</span><h1>Правила <em>KL | Classic</em></h1><p>Полные правила классического сервера.</p></div>
+<div class="notice"><span class="notice-icon">i</span><div>Заходя на сервер, вы автоматически соглашаетесь с правилами.</div></div>
 <h3 class="subhead">Общие правила</h3>
 <div class="rows">
 <div class="row"><div class="row-num">1.0</div><div class="row-body"><strong>Запрещено использовать ПО или читы</strong><span class="row-pen">Пожизненный бан</span></div></div>
@@ -1777,6 +1804,7 @@ Boosty: https://boosty.to/kolinsl
 <div class="row"><div class="row-num">3.3</div><div class="row-body"><strong>Запрещено вводить в заблуждение</strong><span class="row-pen">Х3</span></div></div>
 <div class="row"><div class="row-num">3.4</div><div class="row-body"><strong>Запрещён выход во время разбора</strong><span class="row-pen">Х3</span></div></div>
 </div>
+<div class="notice danger"><span class="notice-icon">!</span><div><b>Важно!</b> Администрация может вынести наказание <b>даже при отсутствии прямого пункта правил</b>, если сочтёт ваши действия деструктивными, направленными на ухудшение игрового процесса или вредительство проекту. Наличие правил не ограничивает администрацию в защите интересов сервера и сообщества.</div></div>
 <h3 class="subhead">Правила администрации Classic</h3>
 <div class="rows">
 <div class="row"><div class="row-num">1.1</div><div class="row-body"><strong>Запрещен админ абуз</strong><span class="row-pen">от 1 преда до снятия</span></div></div>
@@ -1802,7 +1830,7 @@ Boosty: https://boosty.to/kolinsl
 <!-- RULES Events -->
 <section class="page" id="page-rules-events">
 <div class="hero"><span class="hero-badge">Правила · Events</span><h1>Правила <em>KOLIN EVENT'S</em></h1><p>Правила ивентов, администрирования, RP-поведения.</p></div>
-<div class="notice"><span class="notice-icon">i</span><div>Правила могут изменяться без уведомлений. Предложения — в канал «предложения».</div></div>
+<div class="notice"><span class="notice-icon">i</span><div>Заходя на сервер, вы автоматически соглашаетесь с правилами. Правила могут изменяться без уведомлений. Предложения — в канал «предложения».</div></div>
 <h3 class="subhead">🛡️ Правила RP</h3>
 <div class="rows">
 <div class="row"><div class="row-num">1</div><div class="row-body"><strong>RolePlay — ролевая игра</strong><span class="row-note">Описание от 3-го лица, действия от 2-го.</span></div></div>
@@ -1836,6 +1864,7 @@ Boosty: https://boosty.to/kolinsl
 <div class="row"><div class="row-num">7</div><div class="row-body"><strong>Запрещены бессмысленные репорты</strong><span class="row-pen">3h ban</span></div></div>
 <div class="row"><div class="row-num">8</div><div class="row-body"><strong>Запрещён тимкилл/тимдамаг и суицид на важных ролях</strong><span class="row-pen">6h ban</span></div></div>
 </div>
+<div class="notice danger"><span class="notice-icon">!</span><div><b>Важно!</b> Администрация может вынести наказание <b>даже при отсутствии прямого пункта правил</b>, если сочтёт ваши действия деструктивными, направленными на ухудшение игрового процесса или вредительство проекту. Наличие правил не ограничивает администрацию в защите интересов сервера и сообщества.</div></div>
 <h3 class="subhead">💼 Правила администрации Events</h3>
 <div class="notice danger"><span class="notice-icon">!</span><div><b>Система:</b> 3 pred для донат-админов — снятие. 4 pred для наборных — снятие. 3 устных = 1 pred.</div></div>
 <div class="rows">
@@ -1907,6 +1936,7 @@ Boosty: https://boosty.to/kolinsl
 <div class="row"><div class="row-num">9</div><div class="row-body"><strong>В голосовом чате запрещены помехи, изменение голоса, Soundpad, 18+</strong><span class="row-pen">Мут 1ч + 3 преда</span></div></div>
 <div class="row"><div class="row-num">10</div><div class="row-body"><strong>Запрещено использование личной информации без согласия</strong><span class="row-pen">Мут 24ч + 3 преда, при повторе — Бан</span></div></div>
 </div>
+<div class="notice danger"><span class="notice-icon">!</span><div><b>Важно!</b> Модерация может вынести наказание <b>даже при отсутствии прямого пункта правил</b>, если сочтёт ваши действия деструктивными, направленными на ухудшение атмосферы сервера или вредительство сообществу.</div></div>
 <h3 class="subhead">Правила модерации</h3>
 <div class="rows">
 <div class="row"><div class="row-num">1</div><div class="row-body"><strong>Отписывать каждый мут/бан/пред в отчёты</strong><span class="row-note">Меньше 15 отчётов за 2 недели — плохо. Ветка + скрин/демка.</span></div></div>
