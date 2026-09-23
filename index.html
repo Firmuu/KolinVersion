@@ -6,7 +6,7 @@
 <title>KOLIN — SCP: Secret Laboratory</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;transition-timing-function:cubic-bezier(0.4,0,0.2,1)}
 :root{
@@ -111,7 +111,6 @@ opacity:0.03;mix-blend-mode:overlay;
 background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>")}
 html[data-theme="light"] .noise-overlay{opacity:0.025}
 
-/* КУРСОРНЫЙ ШЛЕЙФ */
 .cursor-glow{position:fixed;pointer-events:none;z-index:9998;
 width:340px;height:340px;border-radius:50%;
 background:radial-gradient(circle,rgba(var(--accent-rgb),0.07),transparent 62%);
@@ -166,14 +165,8 @@ border-radius:var(--radius-sm);font-weight:800;font-size:13px;color:#fff;
 box-shadow:0 0 0 1px var(--accent-border),0 4px 12px var(--accent-glow),
 inset 0 1px 0 rgba(255,255,255,0.2);flex-shrink:0;
 transition:transform .3s,box-shadow .3s,background .3s;position:relative}
-.logo-mark::before,.logo-mark::after{
-content:attr(data-letter);position:absolute;inset:0;display:grid;place-items:center;
-color:inherit;border-radius:inherit;opacity:0;pointer-events:none;
-background:transparent;font-weight:800;font-size:13px}
 .sidebar__header:hover .logo-mark{transform:rotate(-8deg) scale(1.05);
 box-shadow:0 0 0 1px var(--accent-border),0 8px 24px var(--accent-glow)}
-.sidebar__header:hover .logo-mark::before{opacity:.7;transform:translate(-2px,0);color:var(--accent);transition:all .2s}
-.sidebar__header:hover .logo-mark::after{opacity:.7;transform:translate(2px,0);color:var(--accent-2);transition:all .2s}
 .sidebar__brand{font-weight:700;font-size:15px;display:flex;align-items:center;gap:8px;letter-spacing:-0.01em}
 .sidebar__brand span:last-child{color:var(--text-3);font-weight:400;font-size:12px;
 text-transform:uppercase;letter-spacing:.08em;position:relative;padding-left:10px}
@@ -496,6 +489,111 @@ border-bottom:1px solid var(--accent-border);
 transition:border-color .2s,filter .2s}
 .card p a:hover,.info-box a:hover,.notice a:hover{
 border-bottom-color:var(--accent);filter:drop-shadow(0 0 6px var(--accent-glow))}
+
+/* === DONATE CARD (НОВЫЙ) === */
+.donate-card{background:var(--bg-1);border:1px solid var(--border);border-radius:var(--radius);
+padding:24px 22px 20px;transition:all var(--transition);position:relative;overflow:hidden;
+display:flex;flex-direction:column;
+box-shadow:0 1px 0 rgba(255,255,255,0.02),0 2px 8px rgba(0,0,0,0.15)}
+html[data-theme="light"] .donate-card{background:#fff;border-color:#e6e2da;
+box-shadow:0 1px 2px rgba(28,25,23,0.04),0 2px 8px rgba(28,25,23,0.03),inset 0 1px 0 rgba(255,255,255,0.9)}
+.donate-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;
+background:linear-gradient(90deg,var(--accent),transparent);
+transform:scaleX(0);transform-origin:left;transition:transform .3s;z-index:1}
+.donate-card::after{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;
+background:linear-gradient(90deg,transparent,rgba(var(--accent-rgb),0.08),transparent);
+pointer-events:none;transition:left .6s ease}
+.donate-card:hover{border-color:var(--accent-border);background:var(--bg-2);transform:translateY(-3px);
+box-shadow:0 1px 0 rgba(255,255,255,0.04),0 16px 56px rgba(0,0,0,0.45),
+0 0 0 1px var(--accent-border),0 0 40px -10px var(--accent-glow)}
+html[data-theme="light"] .donate-card:hover{background:#fff;
+box-shadow:0 4px 12px rgba(28,25,23,0.06),0 16px 48px rgba(var(--accent-rgb),0.14),0 0 0 1px var(--accent-border)}
+.donate-card:hover::before{transform:scaleX(1)}
+.donate-card:hover::after{left:100%}
+
+.donate-head{display:flex;align-items:flex-start;justify-content:space-between;gap:14px;margin-bottom:18px}
+.donate-name{font-size:24px;font-weight:900;letter-spacing:-.03em;line-height:1.1;
+color:var(--text);margin:0}
+html[data-theme="light"] .donate-name{color:#0c0a09}
+.donate-card:hover .donate-name{background:linear-gradient(135deg,var(--accent),var(--accent-2));
+-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+
+.donate-price{display:flex;flex-direction:column;align-items:flex-end;gap:4px;flex-shrink:0}
+.donate-price__main{font-size:26px;font-weight:900;letter-spacing:-.04em;line-height:1;
+color:var(--accent-2);font-variant-numeric:tabular-nums}
+html[data-theme="light"] .donate-price__main{color:var(--accent-3)}
+.donate-price__label{font-size:10.5px;font-weight:700;text-transform:uppercase;
+letter-spacing:.1em;color:var(--text-3);white-space:nowrap}
+
+.donate-sub{font-size:13px;color:var(--text-2);line-height:1.55;margin-bottom:16px;
+padding-bottom:16px;border-bottom:1px dashed var(--border-2)}
+html[data-theme="light"] .donate-sub{border-bottom-color:#d1ccc2}
+
+.donate-features{list-style:none;padding:0;margin:0 0 20px;flex:1}
+.donate-features li{position:relative;padding:6px 0 6px 22px;font-size:13.5px;
+color:var(--text-2);line-height:1.5}
+.donate-features li::before{content:'';position:absolute;left:0;top:12px;
+width:12px;height:2px;background:var(--accent);border-radius:2px;
+box-shadow:0 0 8px var(--accent-glow);transition:width .2s}
+.donate-card:hover .donate-features li::before{width:16px}
+
+.donate-footer{display:flex;align-items:center;justify-content:space-between;
+gap:10px;flex-wrap:wrap;margin-top:auto;padding-top:16px;
+border-top:1px solid var(--border-2)}
+html[data-theme="light"] .donate-footer{border-top-color:#d1ccc2}
+.donate-duration{display:inline-flex;align-items:center;gap:7px;padding:6px 12px;
+background:var(--accent-soft);border:1px solid var(--accent-border);
+border-radius:100px;font-size:11.5px;font-weight:600;color:var(--accent-2);
+font-family:var(--mono);letter-spacing:.02em}
+html[data-theme="light"] .donate-duration{color:var(--accent-3)}
+.donate-duration svg{width:12px;height:12px;flex-shrink:0}
+.donate-monthly{font-size:12.5px;color:var(--text-3);font-weight:500}
+.donate-monthly b{color:var(--text-2);font-weight:700;font-family:var(--mono)}
+
+/* === FAQ (НОВЫЙ) === */
+.faq-item{background:var(--bg-1);border:1px solid var(--border);border-radius:var(--radius);
+margin-bottom:12px;overflow:hidden;transition:all var(--transition)}
+html[data-theme="light"] .faq-item{background:#fff;border-color:#e6e2da;
+box-shadow:0 1px 2px rgba(28,25,23,0.03)}
+.faq-item:hover{border-color:var(--accent-border)}
+.faq-item.open{border-color:var(--accent-border);
+box-shadow:0 0 0 3px var(--accent-soft),0 8px 32px -10px var(--accent-glow)}
+.faq-q{width:100%;padding:18px 22px;display:flex;align-items:center;gap:16px;
+text-align:left;font-size:14.5px;font-weight:600;color:var(--text);
+transition:color .2s;cursor:pointer;line-height:1.4}
+.faq-q:hover{color:var(--accent-2)}
+.faq-item.open .faq-q{color:var(--accent-2)}
+.faq-q__mark{width:28px;height:28px;border-radius:var(--radius-sm);flex-shrink:0;
+display:grid;place-items:center;
+background:var(--accent-soft);border:1px solid var(--accent-border);
+color:var(--accent-2);font-family:var(--mono);font-size:11.5px;font-weight:700;
+transition:all .3s}
+html[data-theme="light"] .faq-q__mark{color:var(--accent-3)}
+.faq-item.open .faq-q__mark{background:var(--accent);color:#fff;border-color:var(--accent);
+box-shadow:0 0 16px var(--accent-glow)}
+.faq-q__text{flex:1}
+.faq-q__arrow{width:20px;height:20px;flex-shrink:0;color:var(--text-3);
+transition:transform .3s,color .2s}
+.faq-item.open .faq-q__arrow{transform:rotate(180deg);color:var(--accent)}
+.faq-a{max-height:0;overflow:hidden;transition:max-height .35s cubic-bezier(0.4,0,0.2,1);
+padding:0 22px 0 66px;font-size:14px;color:var(--text-2);line-height:1.65}
+.faq-item.open .faq-a{max-height:1000px;padding:0 22px 20px 66px}
+.faq-a p{margin-bottom:10px}
+.faq-a p:last-child{margin-bottom:0}
+.faq-a ul{list-style:none;padding:0;margin:8px 0 10px}
+.faq-a li{position:relative;padding:4px 0 4px 18px;font-size:13.5px;line-height:1.55}
+.faq-a li::before{content:'';position:absolute;left:0;top:12px;width:6px;height:6px;
+background:var(--accent);border-radius:50%;box-shadow:0 0 8px var(--accent-glow)}
+.faq-a b{color:var(--accent-2);font-weight:600}
+html[data-theme="light"] .faq-a b{color:var(--accent-3)}
+.faq-a code{font-family:var(--mono);font-size:12.5px;padding:2px 7px;
+background:var(--bg-3);border:1px solid var(--border-2);border-radius:4px;
+color:var(--accent-2)}
+html[data-theme="light"] .faq-a code{background:#f5f2ec;border-color:#e2dfd8;color:var(--accent-3)}
+.faq-a a{color:var(--accent-2);border-bottom:1px solid var(--accent-border);
+transition:border-color .2s}
+.faq-a a:hover{border-bottom-color:var(--accent)}
+html[data-theme="light"] .faq-a a{color:var(--accent-3)}
 
 /* RANK CARD */
 .rank-card{background:var(--bg-1);border:1px solid var(--border);border-radius:var(--radius);
@@ -832,6 +930,12 @@ box-shadow:0 10px 28px rgba(var(--accent-rgb),0.4)}
 .row{grid-template-columns:52px 1fr;gap:14px;padding:16px 18px}
 .rank-step{grid-template-columns:auto 1fr;padding:16px 18px;gap:14px}
 .rank-days{grid-column:1/-1;justify-self:start;margin-top:4px;max-width:none}
+.donate-head{flex-direction:column;align-items:flex-start}
+.donate-price{align-items:flex-start}
+.donate-name{font-size:22px}
+.donate-price__main{font-size:22px}
+.faq-a{padding-left:22px}
+.faq-item.open .faq-a{padding-left:22px}
 .page.active{transform:none!important}
 }
 @media(max-width:520px){
@@ -840,6 +944,11 @@ box-shadow:0 10px 28px rgba(var(--accent-rgb),0.4)}
 .rank-badge{min-width:38px;height:38px;font-size:12px}
 .rank-flow{flex-direction:column;align-items:flex-start;gap:4px}
 .rank-arrow{transform:rotate(90deg);margin-left:6px}
+.donate-name{font-size:20px}
+.donate-price__main{font-size:20px}
+.faq-q{padding:14px 16px;font-size:13.5px;gap:12px}
+.faq-item.open .faq-a{padding:0 16px 16px 16px;font-size:13.5px}
+.faq-q__mark{width:24px;height:24px;font-size:10.5px}
 }
 @media(prefers-reduced-motion:reduce){
 *,*::before,*::after{animation-duration:.01ms!important;
@@ -873,6 +982,14 @@ body::before,body::after,.bg-particles span,.bg-hexagons svg,
 <a class="nav-item active" data-page="about-site" onclick="showPage('about-site')">
 <span class="nav-item__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg></span>
 <span>О сайте</span>
+</a>
+<a class="nav-item" data-page="servers" onclick="showPage('servers')">
+<span class="nav-item__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="6" rx="2"/><rect x="2" y="15" width="20" height="6" rx="2"/><path d="M6 6h.01M6 18h.01"/></svg></span>
+<span>Серверы</span>
+</a>
+<a class="nav-item" data-page="faq" onclick="showPage('faq')">
+<span class="nav-item__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3M12 17h.01"/></svg></span>
+<span>Помощь / FAQ</span>
 </a>
 </div>
 <div class="nav-group">
@@ -969,6 +1086,7 @@ body::before,body::after,.bg-particles span,.bg-hexagons svg,
 
 <main class="content">
 
+<!-- ABOUT -->
 <section class="page active" id="page-about-site">
 <div class="hero">
 <span class="hero-badge new">Информация</span>
@@ -987,10 +1105,10 @@ body::before,body::after,.bg-particles span,.bg-hexagons svg,
 </div>
 <h3 class="subhead">Что внутри</h3>
 <div class="grid-2">
+<div class="card"><span class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="6" rx="2"/><rect x="2" y="15" width="20" height="6" rx="2"/><path d="M6 6h.01M6 18h.01"/></svg></span><h3>Серверы</h3><p>Все четыре сервера проекта с IP-адресами и кнопкой быстрого подключения через Steam.</p></div>
 <div class="card"><span class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 4 6v6c0 5 3.4 9.4 8 10 4.6-.6 8-5 8-10V6z"/><path d="m9 12 2 2 4-4"/></svg></span><h3>Администрация</h3><p>Состав администрации каждого сервера, ранги, система наказаний, повышения и полный набор правил для админов.</p></div>
 <div class="card"><span class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="8" y1="13" x2="16" y2="13"/><line x1="8" y1="17" x2="14" y2="17"/></svg></span><h3>Правила</h3><p>Полные правила для игроков и администрации каждого сервера: общие, игровые, RP-правила и правила администрации.</p></div>
 <div class="card"><span class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h12l4 6-10 12L2 9z"/><path d="M11 3 8 9l4 12 4-12-3-6M2 9h20"/></svg></span><h3>Донат-привилегии</h3><p>Актуальные донат-привилегии для каждого сервера с ценами и особенностями. Все донаты не нарушают VSR.</p></div>
-<div class="card"><span class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v6M12 22v-6M4.93 4.93l4.24 4.24M14.83 14.83l4.24 4.24M2 12h6M22 12h-6M4.93 19.07l4.24-4.24M14.83 9.17l4.24-4.24"/></svg></span><h3>Команды и ивенты</h3><p>Команды сервера Events, мини-ивенты, кастомные предметы, плагины и полная документация по проведению.</p></div>
 </div>
 <h3 class="subhead">Присоединиться</h3>
 <div class="notice"><span class="notice-icon">i</span><div>Основная площадка сообщества проекта KOLIN — <b>Discord-сервер</b>. Все обсуждения, заявки в стафф, жалобы и покупка доната проходят там.</div></div>
@@ -999,10 +1117,283 @@ body::before,body::after,.bg-particles span,.bg-hexagons svg,
 <div class="grid-3">
 <div class="card"><span class="card-tag">Discord</span><h3>Основной сервер</h3><p>discord.gg/hspYgyrS5U</p></div>
 <div class="card"><span class="card-tag">Автор сайта</span><h3>Firmuu</h3><p>По вопросам сайта — в Discord.</p></div>
-<div class="card"><span class="card-tag">Обновления</span><h3>Актуальность</h3><p>Сайт обновляется по мере изменений в проекте.</p></div>
+<div class="card"><span class="card-tag">Помощь</span><h3>FAQ</h3><p>Ответы на частые вопросы — в разделе «Помощь / FAQ».</p></div>
 </div>
 <div class="notice" style="margin-top:32px"><span class="notice-icon">i</span><div>© 2022 Kolin. Все права защищены. Сайт не связан с Northwood Studios.</div></div>
 </section>
+
+<!-- SERVERS -->
+<section class="page" id="page-servers">
+<div class="hero">
+<span class="hero-badge new">Играть</span>
+<h1>Наши <em>серверы</em></h1>
+<p>Четыре сервера KOLIN — от ванильного Classic до полного NoRules. Выбирай свой и подключайся.</p>
+<div class="hero-meta">
+<div class="hero-meta-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="6" rx="2"/><rect x="2" y="15" width="20" height="6" rx="2"/></svg><span><b>4</b> игровых сервера</span></div>
+<div class="hero-meta-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 4 6v6c0 5 3.4 9.4 8 10 4.6-.6 8-5 8-10V6z"/></svg><span>Все серверы: <b>185.9.145.13</b></span></div>
+</div>
+</div>
+
+<div class="notice"><span class="notice-icon">i</span><div>Кнопка <b>«Подключиться»</b> открывает Steam и автоматически подключает вас к серверу. Если Steam не запущен — он запустится сам.</div></div>
+
+<h3 class="subhead">KOLIN | EVENTS</h3>
+<div class="server-card" style="margin-bottom:24px">
+<div class="server-head">
+<div class="server-name">KOLIN | Events</div>
+<span class="server-badge">Ивенты · RP + NoRP</span>
+</div>
+<p style="font-size:14px;color:var(--text-2);line-height:1.6;margin-bottom:16px">
+Сервер, на котором каждый новый раунд — это новый ивент. Здесь присутствует как РП-отыгрыш, так и нон-РП составляющая. Команда Ивент Мастеров максимально создаёт интересные ивенты для того, чтобы вы не заскучали сидя на сервере.
+</p>
+<div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap">
+<code style="font-family:var(--mono);font-size:14px;padding:9px 16px;background:var(--bg-3);border:1px solid var(--border-2);border-radius:var(--radius-sm);color:var(--accent-2);user-select:all">185.9.145.13:7777</code>
+<a href="steam://connect/185.9.145.13:7777" class="btn btn-primary btn-arrow">Подключиться</a>
+</div>
+</div>
+
+<h3 class="subhead">KOLIN | CLASSIC</h3>
+<div class="server-card" style="margin-bottom:24px">
+<div class="server-head">
+<div class="server-name">KOLIN | Classic</div>
+<span class="server-badge">Vanilla</span>
+</div>
+<p style="font-size:14px;color:var(--text-2);line-height:1.6;margin-bottom:16px">
+Никаких геймплейных плагинов или, как говорится, «Vanilla». Малое количество правил и готовый геймплей точно не оставит тебя равнодушным.
+</p>
+<div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap">
+<code style="font-family:var(--mono);font-size:14px;padding:9px 16px;background:var(--bg-3);border:1px solid var(--border-2);border-radius:var(--radius-sm);color:var(--accent-2);user-select:all">185.9.145.13:7778</code>
+<a href="steam://connect/185.9.145.13:7778" class="btn btn-primary btn-arrow">Подключиться</a>
+</div>
+</div>
+
+<h3 class="subhead">KOLIN | HARD RP</h3>
+<div class="server-card" style="margin-bottom:24px">
+<div class="server-head">
+<div class="server-name">KOLIN | Hard RP</div>
+<span class="server-badge">Hard RP</span>
+</div>
+<p style="font-size:14px;color:var(--text-2);line-height:1.6;margin-bottom:16px">
+Сервер с многими интересными геймплейными плагинами, которые не дадут вам заскучать. Правила легки в изучении, а геймплей интересен за счёт Hard RP. Для людей, которые любят RP-тематику, это станет любимым сервером.
+</p>
+<div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap">
+<code style="font-family:var(--mono);font-size:14px;padding:9px 16px;background:var(--bg-3);border:1px solid var(--border-2);border-radius:var(--radius-sm);color:var(--accent-2);user-select:all">185.9.145.13:7779</code>
+<a href="steam://connect/185.9.145.13:7779" class="btn btn-primary btn-arrow">Подключиться</a>
+</div>
+</div>
+
+<h3 class="subhead">KOLIN | NORULES</h3>
+<div class="server-card" style="margin-bottom:24px">
+<div class="server-head">
+<div class="server-name">KOLIN | NoRules</div>
+<span class="server-badge">NoRules</span>
+</div>
+<p style="font-size:14px;color:var(--text-2);line-height:1.6;margin-bottom:16px">
+Сервер с многими интересными геймплейными плагинами, которые не дадут вам заскучать. Почти полное отсутствие правил и готовый геймплей точно не оставят тебя равнодушным. Для людей, которые хотят отдохнуть, это станет любимым сервером.
+</p>
+<div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap">
+<code style="font-family:var(--mono);font-size:14px;padding:9px 16px;background:var(--bg-3);border:1px solid var(--border-2);border-radius:var(--radius-sm);color:var(--accent-2);user-select:all">185.9.145.13:7780</code>
+<a href="steam://connect/185.9.145.13:7780" class="btn btn-primary btn-arrow">Подключиться</a>
+</div>
+</div>
+
+<h3 class="subhead">Присоединиться к сообществу</h3>
+<div class="notice"><span class="notice-icon">i</span><div>Заходи в <b>Discord-сервер проекта</b> — там расписание ивентов, обсуждения, заявки в стафф и покупка доната.</div></div>
+<a href="https://discord.gg/hspYgyrS5U" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-arrow">Перейти в Discord</a>
+</section>
+
+<!-- FAQ -->
+<section class="page" id="page-faq">
+<div class="hero">
+<span class="hero-badge new">Помощь</span>
+<h1>Помощь / <em>FAQ</em></h1>
+<p>Ответы на частые вопросы по серверам, донату, жалобам и администрированию проекта KOLIN.</p>
+<div class="hero-meta">
+<div class="hero-meta-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3M12 17h.01"/></svg><span><b>12</b> вопросов</span></div>
+<div class="hero-meta-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 4 6v6c0 5 3.4 9.4 8 10 4.6-.6 8-5 8-10V6z"/></svg><span>Обновляется по мере изменений</span></div>
+</div>
+</div>
+
+<div class="notice"><span class="notice-icon">i</span><div>Не нашли ответ? Задайте вопрос в <b>Discord-сервере проекта</b> — вам помогут администраторы и участники сообщества.</div></div>
+
+<h3 class="subhead">🌐 Общие вопросы</h3>
+
+<div class="faq-item">
+<button class="faq-q" onclick="toggleFaq(this)">
+<span class="faq-q__mark">01</span>
+<span class="faq-q__text">Что такое KOLIN и какие у вас серверы?</span>
+<svg class="faq-q__arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+</button>
+<div class="faq-a"><p><b>KOLIN</b> — проект по игре SCP: Secret Laboratory, основанный в 2022 году. У нас четыре сервера:</p>
+<ul>
+<li><b>KOLIN | Events</b> — каждый раунд новый ивент, RP + NoRP.</li>
+<li><b>KOLIN | Classic</b> — ванильный SCP:SL без геймплейных плагинов.</li>
+<li><b>KOLIN | Hard RP</b> — сервер с уклоном в RP и множеством плагинов.</li>
+<li><b>KOLIN | NoRules</b> — почти полное отсутствие правил, много плагинов.</li>
+</ul>
+<p>Все серверы доступны по IP <code>185.9.145.13</code> с портами 7777–7780.</p></div>
+</div>
+
+<div class="faq-item">
+<button class="faq-q" onclick="toggleFaq(this)">
+<span class="faq-q__mark">02</span>
+<span class="faq-q__text">Как подключиться к серверу?</span>
+<svg class="faq-q__arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+</button>
+<div class="faq-a"><p>Есть три способа:</p>
+<ul>
+<li>В разделе <b>«Серверы»</b> нажмите кнопку <b>«Подключиться»</b> — Steam откроется и подключит вас автоматически.</li>
+<li>Через консоль SCP:SL (<code>~</code>) введите <code>connect 185.9.145.13:7777</code>, заменив порт на нужный.</li>
+<li>Через меню SCP:SL — «Play» → «Direct Connect» → введите IP.</li>
+</ul></div>
+</div>
+
+<h3 class="subhead">💰 Донат</h3>
+
+<div class="faq-item">
+<button class="faq-q" onclick="toggleFaq(this)">
+<span class="faq-q__mark">03</span>
+<span class="faq-q__text">Как купить донат-привилегию?</span>
+<svg class="faq-q__arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+</button>
+<div class="faq-a"><p>Все покупки проводятся через <b>Discord-сервер проекта или же напрямую через карту</b>. В комментарии к переводу не забудьте указать купленный донат, его длительность, ваш SteamID64 (https://steamid.io/)
+Boosty: https://boosty.to/kolinsl
+Банковская Карта : 2200 7010 5882 9232
+Если у вас есть вопросы или вы хотите оплатить в личных сообщениях можете написать <b>«В дискорд»</b> — chertilas.</p></div>
+</div>
+
+<div class="faq-item">
+<button class="faq-q" onclick="toggleFaq(this)">
+<span class="faq-q__mark">04</span>
+<span class="faq-q__text">Нарушают ли ваши донаты VSR?</span>
+<svg class="faq-q__arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+</button>
+<div class="faq-a"><p><b>Нет</b>, все донат-привилегии на серверах KOLIN не нарушают правила VSR (Verified Server Rules). Они не дают прямого преимущества в бою и не ломают баланс.</p></div>
+</div>
+
+<div class="faq-item">
+<button class="faq-q" onclick="toggleFaq(this)">
+<span class="faq-q__mark">05</span>
+<span class="faq-q__text">В чём разница между «навсегда» и «в месяц»?</span>
+<svg class="faq-q__arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+</button>
+<div class="faq-a"><p>У каждой привилегии есть две опции:</p>
+<ul>
+<li><b>Навсегда</b> — единоразовый платёж, привилегия остаётся у вас навсегда.</li>
+<li><b>На месяц</b> — подписка, дешевле, но требует продления каждый месяц.</li>
+</ul>
+<p>Суммы указаны рядом с каждой привилегией в разделе «Донат».</p></div>
+</div>
+
+<h3 class="subhead">🛡️ Правила и наказания</h3>
+
+<div class="faq-item">
+<button class="faq-q" onclick="toggleFaq(this)">
+<span class="faq-q__mark">06</span>
+<span class="faq-q__text">Как подать жалобу на игрока?</span>
+<svg class="faq-q__arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+</button>
+<div class="faq-a"><p>Жалобы подаются в <b>Discord-сервере проекта</b> в специальном канале «жалобы и аппелиции». Укажите:</p>
+<ul>
+<li>Ваш никнейм</li>
+<li>Ваш Seam | Discord ID</li>
+<li>Сервер на котором произошло нарушение</li>
+<li>Никнейм нарушителя</li>
+<li>Есть ли у вас запись нарушения</li>
+</ul>
+<p>Без доказательств жалоба может быть отклонена.</p></div>
+</div>
+
+<div class="faq-item">
+<button class="faq-q" onclick="toggleFaq(this)">
+<span class="faq-q__mark">07</span>
+<span class="faq-q__text">Меня забанили несправедливо — что делать?</span>
+<svg class="faq-q__arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+</button>
+<div class="faq-a"><p>Обратитесь в Discord в канал <b>«жалобы и аппелиции»</b>. Приложите:</p>
+<ul>
+<li>Ваш ник</li>
+<li>Какое правило вы нарушили</li>
+<li>Вы получили бан за нарушение правил</li>
+<li>Никнейм администратора забанившего вас</li>
+<li>Согдасны что получили блокировку заслуженно</li>
+</ul>
+<p>Решение принимает старшая администрация.</p></div>
+</div>
+
+<div class="faq-item">
+<button class="faq-q" onclick="toggleFaq(this)">
+<span class="faq-q__mark">08</span>
+<span class="faq-q__text">Что такое ЧС и как из него выйти?</span>
+<svg class="faq-q__arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+</button>
+<div class="faq-a"><p>ЧС бывают четырёх видов:</p>
+<ul>
+<li><b>ЧСА</b> — чёрный список администрации KOLIN.</li>
+<li><b>ЧСД</b> — чёрный список донат-привилегий.</li>
+<li><b>ЧСС</b> — чёрный список собеседований.</li>
+<li><b>ЧСП</b> — чёрный список проекта (permaban).</li>
+</ul>
+<p>По вопросам амнистии обращайтесь в личные сообщения <b>Директору — radddan4</b> в Discord.</p></div>
+</div>
+
+<h3 class="subhead">👥 Администрация</h3>
+
+<div class="faq-item">
+<button class="faq-q" onclick="toggleFaq(this)">
+<span class="faq-q__mark">09</span>
+<span class="faq-q__text">Как попасть в администрацию?</span>
+<svg class="faq-q__arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+</button>
+<div class="faq-a"><p>Общие требования для всех серверов:</p>
+<ul>
+<li>Возраст <b>13+</b></li>
+<li>Не менее <b>50 часов</b> в SCP:SL</li>
+<li>Знание админ-панели и правил конкретного сервера</li>
+</ul>
+<p>Формы подачи заявок есть в разделе <b>«Администрация»</b> для каждого сервера (NoRules, Classic, Events). Для Discord-модерации — отдельные требования, уточняйте в Discord.</p></div>
+</div>
+
+<div class="faq-item">
+<button class="faq-q" onclick="toggleFaq(this)">
+<span class="faq-q__mark">10</span>
+<span class="faq-q__text">Можно ли быть админом на другом проекте?</span>
+<svg class="faq-q__arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+</button>
+<div class="faq-a"><p><b>Нет.</b> Пункт 19 правил администрации NoRules запрещает быть администратором на других проектах SCP:SL. Наказание — снятие вплоть до ЧС.</p></div>
+</div>
+
+<div class="faq-item">
+<button class="faq-q" onclick="toggleFaq(this)">
+<span class="faq-q__mark">11</span>
+<span class="faq-q__text">Как снять предупреждение администратору?</span>
+<svg class="faq-q__arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+</button>
+<div class="faq-a"><p>Предупреждения снимаются за <b>очки активности</b>:</p>
+<ul>
+<li><b>20 очков</b> = снять 1 предупреждение</li>
+<li><b>40 очков</b> = снять 2 предупреждения</li>
+<li><b>60 очков</b> = снять 3 предупреждения</li>
+</ul>
+<p>Свои очки смотрите в таблице администрации. Снятие производит куратор или выше.</p></div>
+</div>
+
+<h3 class="subhead">🛠️ Технические вопросы</h3>
+
+<div class="faq-item">
+<button class="faq-q" onclick="toggleFaq(this)">
+<span class="faq-q__mark">12</span>
+<span class="faq-q__text">Нашёл баг на сервере — куда сообщать?</span>
+<svg class="faq-q__arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+</button>
+<div class="faq-a"><p>Сообщайте в Discord <b>«тех администраторам»</b>. Опишите шаги воспроизведения, приложите демку или скриншот. <b>Не используйте баг в свою пользу</b> — это нарушение правил (багоюз).</p></div>
+</div>
+
+<h3 class="subhead">Остались вопросы?</h3>
+<div class="notice"><span class="notice-icon">i</span><div>Если ответа нет в FAQ — напишите в <b>Discord-сервер проекта</b>. Администрация и участники сообщества помогут.</div></div>
+<a href="https://discord.gg/hspYgyrS5U" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-arrow">Перейти в Discord</a>
+</section>
+
+<!-- ADMIN NoRules -->
 <section class="page" id="page-admin-norules">
 <div class="hero">
 <span class="hero-badge">Внутренний документ</span>
@@ -1086,6 +1477,7 @@ body::before,body::after,.bg-particles span,.bg-hexagons svg,
 <a href="https://docs.google.com/spreadsheets/d/18pR2LiLUsGVB_m_P0RAx2b5DfoT_0rt8OodPg6Hurl4/edit?gid=0#gid=0" target="_blank" class="btn btn-primary btn-arrow">Открыть таблицу состава</a>
 </section>
 
+<!-- ADMIN Classic -->
 <section class="page" id="page-admin-classic">
 <div class="hero">
 <span class="hero-badge">Внутренний документ</span>
@@ -1161,6 +1553,7 @@ body::before,body::after,.bg-particles span,.bg-hexagons svg,
 <a href="https://docs.google.com/spreadsheets/d/1YJP3m7xv02SyS70-27vq1oeDRIaBKO6xWbwSI8y5CEU/edit?pli=1&gid=0#gid=0" target="_blank" class="btn btn-primary btn-arrow" style="margin-top:20px">Открыть таблицу состава</a>
 </section>
 
+<!-- ADMIN Events -->
 <section class="page" id="page-admin-events">
 <div class="hero">
 <span class="hero-badge">Внутренний документ</span>
@@ -1274,6 +1667,7 @@ body::before,body::after,.bg-particles span,.bg-hexagons svg,
 </div>
 </section>
 
+<!-- ADMIN Discord -->
 <section class="page" id="page-admin-discord">
 <div class="hero">
 <span class="hero-badge">Внутренний документ</span>
@@ -1297,6 +1691,7 @@ body::before,body::after,.bg-particles span,.bg-hexagons svg,
 </div>
 </section>
 
+<!-- RULES NoRules -->
 <section class="page" id="page-rules-norules">
 <div class="hero"><span class="hero-badge">Правила · NoRules</span><h1>Правила <em>KL | NoRules</em></h1><p>Свод правил для игроков и администрации сервера NoRules.</p></div>
 <h3 class="subhead">Общие правила</h3>
@@ -1347,6 +1742,7 @@ body::before,body::after,.bg-particles span,.bg-hexagons svg,
 </div>
 </section>
 
+<!-- RULES Classic -->
 <section class="page" id="page-rules-classic">
 <div class="hero"><span class="hero-badge">Правила · Classic</span><h1>Правила <em>KL | Classic</em></h1><p>Полные правила классического сервера.</p></div>
 <h3 class="subhead">Общие правила</h3>
@@ -1403,6 +1799,7 @@ body::before,body::after,.bg-particles span,.bg-hexagons svg,
 <div class="notice"><span class="notice-icon">i</span><div><b>Норма надзирателей:</b> 1–25 игроков — 1+, 25–40 — 2+. <b>Наказание:</b> 1 пред каждому админу.</div></div>
 </section>
 
+<!-- RULES Events -->
 <section class="page" id="page-rules-events">
 <div class="hero"><span class="hero-badge">Правила · Events</span><h1>Правила <em>KOLIN EVENT'S</em></h1><p>Правила ивентов, администрирования, RP-поведения.</p></div>
 <div class="notice"><span class="notice-icon">i</span><div>Правила могут изменяться без уведомлений. Предложения — в канал «предложения».</div></div>
@@ -1493,6 +1890,7 @@ body::before,body::after,.bg-particles span,.bg-hexagons svg,
 </div>
 </section>
 
+<!-- RULES Discord -->
 <section class="page" id="page-rules-discord">
 <div class="hero"><span class="hero-badge">Правила · Discord</span><h1>Правила <em>KL | Discord</em></h1><p>Правила Discord-сервера проекта Kolin.</p></div>
 <div class="notice"><span class="notice-icon">i</span><div>Заходя на сервер, вы автоматически соглашаетесь с правилами.</div></div>
@@ -1523,6 +1921,7 @@ body::before,body::after,.bg-particles span,.bg-hexagons svg,
 </div>
 </section>
 
+<!-- BLACKLIST -->
 <section class="page" id="page-blacklist">
 <div class="hero">
 <span class="hero-badge">Информация</span>
@@ -1543,16 +1942,151 @@ body::before,body::after,.bg-particles span,.bg-hexagons svg,
 <a href="https://discord.gg/hspYgyrS5U" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-arrow">Перейти в Discord</a>
 </section>
 
+<!-- DONATE NoRules -->
 <section class="page" id="page-donate-norules">
-<div class="hero"><span class="hero-badge">Донат · NoRules</span><h1>Донат <em>KL | NoRules</em></h1><p>Не нарушают VSR.</p></div>
+<div class="hero"><span class="hero-badge">Донат · NoRules</span><h1>Донат <em>KL | NoRules</em></h1><p>Все привилегии не нарушают VSR. Цены указаны в двух форматах: навсегда и на месяц.</p></div>
 <div class="notice danger"><span class="notice-icon">!</span><div><b>Цены могут изменяться.</b> Возможны скидки и акции. Актуальную информацию по донату всегда уточняйте в <b>Discord-сервере проекта</b>.</div></div>
 <div class="grid-3">
-<div class="card"><span class="card-tag">Junior · 400 ₽</span><h3>Junior</h3><ul><li>Плашка «Junior» (зелёная)</li><li>Возможность выдавать вещи</li></ul><p style="color:var(--text-3);font-size:12px;font-family:var(--mono);margin-top:12px">навсегда · 100 ₽ / мес</p></div>
-<div class="card"><span class="card-tag">Длань Змея · 600 ₽</span><h3>Длань Змея</h3><ul><li>Плашка «Длань Змея» (синяя)</li><li>Выдавать вещи и эффекты</li></ul><p style="color:var(--text-3);font-size:12px;font-family:var(--mono);margin-top:12px">навсегда · 150 ₽ / мес</p></div>
-<div class="card"><span class="card-tag">Алый Молот · 850 ₽</span><h3>Алый Молот</h3><ul><li>Плашка «Алый Молот» (серая)</li><li>Доступ к админ-чату</li><li>Выдавать эффекты и вещи</li></ul><p style="color:var(--text-3);font-size:12px;font-family:var(--mono);margin-top:12px">навсегда · 250 ₽ / мес</p></div>
-<div class="card"><span class="card-tag">Командир Гок · 1000 ₽</span><h3>Командир Гок</h3><ul><li>Плашка (тёмно-синяя)</li><li>Доступ к админ-чату</li><li>Выдавать эффекты и вещи</li><li>На ивентах — любая роль МОГа</li></ul><p style="color:var(--text-3);font-size:12px;font-family:var(--mono);margin-top:12px">навсегда · 300 ₽ / мес</p></div>
-<div class="card"><span class="card-tag">Фактотум · 2000 ₽</span><h3>Фактотум</h3><ul><li>Плашка (тёмно-синяя)</li><li>Доступ к админ-чату</li><li>Выдавать эффекты и вещи</li><li>На ивентах — любая роль</li><li>Режим наблюдателя</li><li>Смена класса</li></ul><p style="color:var(--text-3);font-size:12px;font-family:var(--mono);margin-top:12px">навсегда · 325 ₽ / мес</p></div>
-<div class="card"><span class="card-tag">Префикс · от 500 ₽</span><h3>Именной префикс</h3><ul><li>Префикс рядом с ником</li><li>Указать: сервер, префикс, цвет</li></ul><p style="color:var(--text-3);font-size:12px;font-family:var(--mono);margin-top:12px">обычный 500/160 · перелив. 600/200</p></div>
+
+<div class="donate-card">
+<div class="donate-head">
+<h3 class="donate-name">Junior</h3>
+<div class="donate-price">
+<span class="donate-price__main">400 ₽</span>
+<span class="donate-price__label">навсегда</span>
+</div>
+</div>
+<div class="donate-sub">Стартовая привилегия для новичков проекта.</div>
+<ul class="donate-features">
+<li>Плашка «Junior» (зелёная)</li>
+<li>Возможность выдавать вещи</li>
+</ul>
+<div class="donate-footer">
+<span class="donate-duration">
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+Навсегда
+</span>
+<span class="donate-monthly">или <b>100 ₽</b> / мес</span>
+</div>
+</div>
+
+<div class="donate-card">
+<div class="donate-head">
+<h3 class="donate-name">Длань Змея</h3>
+<div class="donate-price">
+<span class="donate-price__main">600 ₽</span>
+<span class="donate-price__label">навсегда</span>
+</div>
+</div>
+<div class="donate-sub">Расширенные возможности для активных игроков.</div>
+<ul class="donate-features">
+<li>Плашка «Длань Змея» (синяя)</li>
+<li>Выдавать вещи и эффекты</li>
+</ul>
+<div class="donate-footer">
+<span class="donate-duration">
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+Навсегда
+</span>
+<span class="donate-monthly">или <b>150 ₽</b> / мес</span>
+</div>
+</div>
+
+<div class="donate-card">
+<div class="donate-head">
+<h3 class="donate-name">Алый Молот</h3>
+<div class="donate-price">
+<span class="donate-price__main">850 ₽</span>
+<span class="donate-price__label">навсегда</span>
+</div>
+</div>
+<div class="donate-sub">Доступ к админ-чату и расширенная выдача.</div>
+<ul class="donate-features">
+<li>Плашка «Алый Молот» (серая)</li>
+<li>Доступ к админ-чату</li>
+<li>Выдавать эффекты и вещи</li>
+</ul>
+<div class="donate-footer">
+<span class="donate-duration">
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+Навсегда
+</span>
+<span class="donate-monthly">или <b>250 ₽</b> / мес</span>
+</div>
+</div>
+
+<div class="donate-card">
+<div class="donate-head">
+<h3 class="donate-name">Командир Гок</h3>
+<div class="donate-price">
+<span class="donate-price__main">1000 ₽</span>
+<span class="donate-price__label">навсегда</span>
+</div>
+</div>
+<div class="donate-sub">Любая роль МОГа на ивентах и расширенная выдача.</div>
+<ul class="donate-features">
+<li>Плашка (тёмно-синяя)</li>
+<li>Доступ к админ-чату</li>
+<li>Выдавать эффекты и вещи</li>
+<li>На ивентах — любая роль МОГа</li>
+</ul>
+<div class="donate-footer">
+<span class="donate-duration">
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+Навсегда
+</span>
+<span class="donate-monthly">или <b>300 ₽</b> / мес</span>
+</div>
+</div>
+
+<div class="donate-card">
+<div class="donate-head">
+<h3 class="donate-name">Фактотум</h3>
+<div class="donate-price">
+<span class="donate-price__main">2000 ₽</span>
+<span class="donate-price__label">навсегда</span>
+</div>
+</div>
+<div class="donate-sub">Максимальная привилегия NoRules: любая роль, смена класса, наблюдатель.</div>
+<ul class="donate-features">
+<li>Плашка (тёмно-синяя)</li>
+<li>Доступ к админ-чату</li>
+<li>Выдавать эффекты и вещи</li>
+<li>На ивентах — любая роль</li>
+<li>Режим наблюдателя</li>
+<li>Смена класса</li>
+</ul>
+<div class="donate-footer">
+<span class="donate-duration">
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+Навсегда
+</span>
+<span class="donate-monthly">или <b>325 ₽</b> / мес</span>
+</div>
+</div>
+
+<div class="donate-card">
+<div class="donate-head">
+<h3 class="donate-name">Именной префикс</h3>
+<div class="donate-price">
+<span class="donate-price__main">от 500 ₽</span>
+<span class="donate-price__label">навсегда</span>
+</div>
+</div>
+<div class="donate-sub">Индивидуальный префикс рядом с ником. Указывается сервер, текст и цвет.</div>
+<ul class="donate-features">
+<li>Префикс рядом с ником</li>
+<li>Указать: сервер, префикс, цвет</li>
+</ul>
+<div class="donate-footer">
+<span class="donate-duration">
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+Навсегда
+</span>
+<span class="donate-monthly">обычн. <b>500/160</b> · перелив. <b>600/200</b></span>
+</div>
+</div>
+
 </div>
 <h3 class="subhead">Правила донатов</h3>
 <div class="rows">
@@ -1572,17 +2106,172 @@ body::before,body::after,.bg-particles span,.bg-hexagons svg,
 <a href="https://discord.gg/hspYgyrS5U" target="_blank" class="btn btn-primary btn-arrow">Перейти в Discord</a>
 </section>
 
+<!-- DONATE Classic -->
 <section class="page" id="page-donate-classic">
-<div class="hero"><span class="hero-badge">Донат · Classic</span><h1>Донат <em>KL | Classic</em></h1><p>Не нарушают VSR.</p></div>
+<div class="hero"><span class="hero-badge">Донат · Classic</span><h1>Донат <em>KL | Classic</em></h1><p>Все привилегии не нарушают VSR. Цены указаны в двух форматах: навсегда и на месяц.</p></div>
 <div class="notice danger"><span class="notice-icon">!</span><div><b>Цены могут изменяться.</b> Возможны скидки и акции. Актуальную информацию по донату всегда уточняйте в <b>Discord-сервере проекта</b>.</div></div>
 <div class="grid-3">
-<div class="card"><span class="card-tag">Junior · 400 ₽</span><h3>Junior</h3><ul><li>Плашка «Junior» (зелёная)</li><li>Возможность выдавать вещи</li></ul><p style="color:var(--text-3);font-size:12px;font-family:var(--mono);margin-top:12px">навсегда · 100 ₽ / мес</p></div>
-<div class="card"><span class="card-tag">Оперативник МОГ · 600 ₽</span><h3>Оперативник МОГ</h3><ul><li>Плашка (синяя)</li><li>Выдавать вещи и эффекты</li></ul><p style="color:var(--text-3);font-size:12px;font-family:var(--mono);margin-top:12px">навсегда · 150 ₽ / мес</p></div>
-<div class="card"><span class="card-tag">Секретный Агент · 850 ₽</span><h3>Секретный Агент</h3><ul><li>Плашка (серая)</li><li>Доступ к админ-чату</li><li>Выдавать эффекты и вещи</li></ul><p style="color:var(--text-3);font-size:12px;font-family:var(--mono);margin-top:12px">навсегда · 250 ₽ / мес</p></div>
-<div class="card"><span class="card-tag">Командир МОГ · 1000 ₽</span><h3>Командир МОГ</h3><ul><li>Плашка (тёмно-синяя)</li><li>Доступ к админ-чату</li><li>Выдавать эффекты и вещи</li><li>На ивентах — любая роль МОГа</li></ul><p style="color:var(--text-3);font-size:12px;font-family:var(--mono);margin-top:12px">навсегда · 300 ₽ / мес</p></div>
-<div class="card"><span class="card-tag">Директор Зоны · 2000 ₽</span><h3>Директор Зоны</h3><ul><li>Плашка (тёмно-синяя)</li><li>Доступ к админ-чату</li><li>Выдавать эффекты и вещи</li><li>На ивентах — любая роль</li><li>Режим наблюдателя</li><li>Смена класса</li></ul><p style="color:var(--text-3);font-size:12px;font-family:var(--mono);margin-top:12px">навсегда · 325 ₽ / мес</p></div>
-<div class="card"><span class="card-tag">Префикс · от 500 ₽</span><h3>Именной префикс</h3><ul><li>Префикс рядом с ником</li><li>Указать: сервер, префикс, цвет</li></ul><p style="color:var(--text-3);font-size:12px;font-family:var(--mono);margin-top:12px">обычный 500/160 · перелив. 600/200</p></div>
-<div class="card"><span class="card-tag">Резервный слот · от 250 ₽</span><h3>Резервный слот</h3><ul><li>Вход на полный сервер</li></ul><p style="color:var(--text-3);font-size:12px;font-family:var(--mono);margin-top:12px">1м 250 · 3м 600 · навсегда 3000</p></div>
+
+<div class="donate-card">
+<div class="donate-head">
+<h3 class="donate-name">Junior</h3>
+<div class="donate-price">
+<span class="donate-price__main">400 ₽</span>
+<span class="donate-price__label">навсегда</span>
+</div>
+</div>
+<div class="donate-sub">Стартовая привилегия для новичков проекта.</div>
+<ul class="donate-features">
+<li>Плашка «Junior» (зелёная)</li>
+<li>Возможность выдавать вещи</li>
+</ul>
+<div class="donate-footer">
+<span class="donate-duration">
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+Навсегда
+</span>
+<span class="donate-monthly">или <b>100 ₽</b> / мес</span>
+</div>
+</div>
+
+<div class="donate-card">
+<div class="donate-head">
+<h3 class="donate-name">Оперативник МОГ</h3>
+<div class="donate-price">
+<span class="donate-price__main">600 ₽</span>
+<span class="donate-price__label">навсегда</span>
+</div>
+</div>
+<div class="donate-sub">Расширенные возможности для активных игроков.</div>
+<ul class="donate-features">
+<li>Плашка (синяя)</li>
+<li>Выдавать вещи и эффекты</li>
+</ul>
+<div class="donate-footer">
+<span class="donate-duration">
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+Навсегда
+</span>
+<span class="donate-monthly">или <b>150 ₽</b> / мес</span>
+</div>
+</div>
+
+<div class="donate-card">
+<div class="donate-head">
+<h3 class="donate-name">Секретный Агент</h3>
+<div class="donate-price">
+<span class="donate-price__main">850 ₽</span>
+<span class="donate-price__label">навсегда</span>
+</div>
+</div>
+<div class="donate-sub">Доступ к админ-чату и расширенная выдача.</div>
+<ul class="donate-features">
+<li>Плашка (серая)</li>
+<li>Доступ к админ-чату</li>
+<li>Выдавать эффекты и вещи</li>
+</ul>
+<div class="donate-footer">
+<span class="donate-duration">
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+Навсегда
+</span>
+<span class="donate-monthly">или <b>250 ₽</b> / мес</span>
+</div>
+</div>
+
+<div class="donate-card">
+<div class="donate-head">
+<h3 class="donate-name">Командир МОГ</h3>
+<div class="donate-price">
+<span class="donate-price__main">1000 ₽</span>
+<span class="donate-price__label">навсегда</span>
+</div>
+</div>
+<div class="donate-sub">Любая роль МОГа на ивентах и расширенная выдача.</div>
+<ul class="donate-features">
+<li>Плашка (тёмно-синяя)</li>
+<li>Доступ к админ-чату</li>
+<li>Выдавать эффекты и вещи</li>
+<li>На ивентах — любая роль МОГа</li>
+</ul>
+<div class="donate-footer">
+<span class="donate-duration">
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+Навсегда
+</span>
+<span class="donate-monthly">или <b>300 ₽</b> / мес</span>
+</div>
+</div>
+
+<div class="donate-card">
+<div class="donate-head">
+<h3 class="donate-name">Директор Зоны</h3>
+<div class="donate-price">
+<span class="donate-price__main">2000 ₽</span>
+<span class="donate-price__label">навсегда</span>
+</div>
+</div>
+<div class="donate-sub">Максимальная привилегия Classic: любая роль, смена класса, наблюдатель.</div>
+<ul class="donate-features">
+<li>Плашка (тёмно-синяя)</li>
+<li>Доступ к админ-чату</li>
+<li>Выдавать эффекты и вещи</li>
+<li>На ивентах — любая роль</li>
+<li>Режим наблюдателя</li>
+<li>Смена класса</li>
+</ul>
+<div class="donate-footer">
+<span class="donate-duration">
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+Навсегда
+</span>
+<span class="donate-monthly">или <b>325 ₽</b> / мес</span>
+</div>
+</div>
+
+<div class="donate-card">
+<div class="donate-head">
+<h3 class="donate-name">Именной префикс</h3>
+<div class="donate-price">
+<span class="donate-price__main">от 500 ₽</span>
+<span class="donate-price__label">навсегда</span>
+</div>
+</div>
+<div class="donate-sub">Индивидуальный префикс рядом с ником.</div>
+<ul class="donate-features">
+<li>Префикс рядом с ником</li>
+<li>Указать: сервер, префикс, цвет</li>
+</ul>
+<div class="donate-footer">
+<span class="donate-duration">
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+Навсегда
+</span>
+<span class="donate-monthly">обычн. <b>500/160</b> · перелив. <b>600/200</b></span>
+</div>
+</div>
+
+<div class="donate-card">
+<div class="donate-head">
+<h3 class="donate-name">Резервный слот</h3>
+<div class="donate-price">
+<span class="donate-price__main">от 250 ₽</span>
+<span class="donate-price__label">за период</span>
+</div>
+</div>
+<div class="donate-sub">Возможность входа на полностью заполненный сервер.</div>
+<ul class="donate-features">
+<li>Вход на полный сервер</li>
+</ul>
+<div class="donate-footer">
+<span class="donate-duration">
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+По подписке
+</span>
+<span class="donate-monthly">1м <b>250</b> · 3м <b>600</b> · навсегда <b>3000</b></span>
+</div>
+</div>
+
 </div>
 <h3 class="subhead">Правила донатов</h3>
 <div class="rows">
@@ -1604,36 +2293,336 @@ body::before,body::after,.bg-particles span,.bg-hexagons svg,
 <a href="https://discord.gg/hspYgyrS5U" target="_blank" class="btn btn-primary btn-arrow">Перейти в Discord</a>
 </section>
 
+<!-- DONATE Events -->
 <section class="page" id="page-donate-events">
-<div class="hero"><span class="hero-badge">Донат · Events</span><h1>Донат <em>KL | Events</em></h1><p>Не нарушают VSR.</p></div>
+<div class="hero"><span class="hero-badge">Донат · Events</span><h1>Донат <em>KL | Events</em></h1><p>Все привилегии не нарушают VSR. Цены указаны в двух форматах: навсегда и на месяц.</p></div>
 <div class="notice danger"><span class="notice-icon">!</span><div><b>Цены могут изменяться.</b> Возможны скидки и акции. Актуальную информацию по донату всегда уточняйте в <b>Discord-сервере проекта</b>.</div></div>
 <div class="grid-3">
-<div class="card"><span class="card-tag">Junior · 400 ₽</span><h3>Junior</h3><ul><li>Плашка (зелёная)</li><li>Голос за ивент после смерти</li><li>Выбор роли на ивенте</li></ul><p style="color:var(--text-3);font-size:12px;font-family:var(--mono);margin-top:12px">навсегда · 100 ₽ / мес</p></div>
-<div class="card"><span class="card-tag">VIP · 600 ₽</span><h3>VIP</h3><ul><li>Плашка «Вип» (жёлтая)</li><li>Голос и выбор роли</li><li>200 HP в начале раунда</li></ul><p style="color:var(--text-3);font-size:12px;font-family:var(--mono);margin-top:12px">навсегда · 200 ₽ / мес</p></div>
-<div class="card"><span class="card-tag">Premium · 850 ₽</span><h3>Premium</h3><ul><li>Плашка (золотая)</li><li>Голос и роль</li><li>200 HP</li><li>Доступ к админ-чату</li></ul><p style="color:var(--text-3);font-size:12px;font-family:var(--mono);margin-top:12px">навсегда · 250 ₽ / мес</p></div>
-<div class="card"><span class="card-tag">Prime · 1000 ₽</span><h3>Prime</h3><ul><li>Плашка (золотая)</li><li>Любая роль на ивенте</li><li>200 HP</li><li>Изменение тега</li><li>Админ-чат</li><li>Выдача вещей (себе)</li><li>Цвет роли в Discord</li><li>2 голоса</li></ul><p style="color:var(--text-3);font-size:12px;font-family:var(--mono);margin-top:12px">навсегда · 300 ₽ / мес</p></div>
-<div class="card"><span class="card-tag">Donate-EM · 1500 ₽</span><h3>Donate-EM</h3><ul><li>Плашка (золотая)</li><li>Изменять класс себе и игрокам</li><li>Выдавать вещи</li><li>Ивенты раунда</li><li>Режим наблюдателя</li><li>Ноуклип</li><li>Эффекты</li><li>Полноправный EM (с припиской)</li></ul><p style="color:var(--text-3);font-size:12px;font-family:var(--mono);margin-top:12px">навсегда · 325 ₽ / мес</p></div>
-<div class="card"><span class="card-tag">Delta Force · 2000 ₽</span><h3>Delta Force</h3><ul><li>Плашка Delta Force</li><li>Полный доступ к админ-панели</li><li>Цвет роли</li><li>Разноцветный ник и плашка</li><li>Проводить ивенты</li><li>Отдельная роль в Discord</li><li>2 голоса + 2 за свой ивент</li></ul><p style="color:var(--text-3);font-size:12px;font-family:var(--mono);margin-top:12px">навсегда · 550 ₽ / мес</p></div>
-<div class="card"><span class="card-tag">Префикс · от 500 ₽</span><h3>Именной префикс</h3><p style="color:var(--text-3);font-size:12px;font-family:var(--mono);margin-top:12px">обычный 500/160 · перелив. 600/200</p></div>
-<div class="card"><span class="card-tag">Заказ ивента · 300 ₽</span><h3>Заказ ивента</h3><ul><li>Любой ивент (не нарушающий VSR) в след. раунде</li></ul><p style="color:var(--text-3);font-size:12px;font-family:var(--mono);margin-top:12px">Один ивент — 300 ₽</p></div>
+
+<div class="donate-card">
+<div class="donate-head">
+<h3 class="donate-name">Junior</h3>
+<div class="donate-price">
+<span class="donate-price__main">400 ₽</span>
+<span class="donate-price__label">навсегда</span>
+</div>
+</div>
+<div class="donate-sub">Стартовая привилегия для новичков Events.</div>
+<ul class="donate-features">
+<li>Плашка (зелёная)</li>
+<li>Голос за ивент после смерти</li>
+<li>Выбор роли на ивенте</li>
+</ul>
+<div class="donate-footer">
+<span class="donate-duration">
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+Навсегда
+</span>
+<span class="donate-monthly">или <b>100 ₽</b> / мес</span>
+</div>
+</div>
+
+<div class="donate-card">
+<div class="donate-head">
+<h3 class="donate-name">VIP</h3>
+<div class="donate-price">
+<span class="donate-price__main">600 ₽</span>
+<span class="donate-price__label">навсегда</span>
+</div>
+</div>
+<div class="donate-sub">Повышенный запас HP и расширенный выбор роли.</div>
+<ul class="donate-features">
+<li>Плашка «Вип» (жёлтая)</li>
+<li>Голос и выбор роли</li>
+<li>200 HP в начале раунда</li>
+</ul>
+<div class="donate-footer">
+<span class="donate-duration">
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+Навсегда
+</span>
+<span class="donate-monthly">или <b>200 ₽</b> / мес</span>
+</div>
+</div>
+
+<div class="donate-card">
+<div class="donate-head">
+<h3 class="donate-name">Premium</h3>
+<div class="donate-price">
+<span class="donate-price__main">850 ₽</span>
+<span class="donate-price__label">навсегда</span>
+</div>
+</div>
+<div class="donate-sub">Доступ к админ-чату и дополнительные возможности.</div>
+<ul class="donate-features">
+<li>Плашка (золотая)</li>
+<li>Голос и роль</li>
+<li>200 HP</li>
+<li>Доступ к админ-чату</li>
+</ul>
+<div class="donate-footer">
+<span class="donate-duration">
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+Навсегда
+</span>
+<span class="donate-monthly">или <b>250 ₽</b> / мес</span>
+</div>
+</div>
+
+<div class="donate-card">
+<div class="donate-head">
+<h3 class="donate-name">Prime</h3>
+<div class="donate-price">
+<span class="donate-price__main">1000 ₽</span>
+<span class="donate-price__label">навсегда</span>
+</div>
+</div>
+<div class="donate-sub">Любая роль на ивенте, тег, цвет роли в Discord и 2 голоса.</div>
+<ul class="donate-features">
+<li>Плашка (золотая)</li>
+<li>Любая роль на ивенте</li>
+<li>200 HP</li>
+<li>Изменение тега</li>
+<li>Админ-чат</li>
+<li>Выдача вещей (себе)</li>
+<li>Цвет роли в Discord</li>
+<li>2 голоса</li>
+</ul>
+<div class="donate-footer">
+<span class="donate-duration">
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+Навсегда
+</span>
+<span class="donate-monthly">или <b>300 ₽</b> / мес</span>
+</div>
+</div>
+
+<div class="donate-card">
+<div class="donate-head">
+<h3 class="donate-name">Donate-EM</h3>
+<div class="donate-price">
+<span class="donate-price__main">1500 ₽</span>
+<span class="donate-price__label">навсегда</span>
+</div>
+</div>
+<div class="donate-sub">Полноправный ивент-мастер с припиской. Полный доступ к RA.</div>
+<ul class="donate-features">
+<li>Плашка (золотая)</li>
+<li>Изменять класс себе и игрокам</li>
+<li>Выдавать вещи</li>
+<li>Ивенты раунда</li>
+<li>Режим наблюдателя</li>
+<li>Ноуклип</li>
+<li>Эффекты</li>
+<li>Полноправный EM (с припиской)</li>
+</ul>
+<div class="donate-footer">
+<span class="donate-duration">
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+Навсегда
+</span>
+<span class="donate-monthly">или <b>325 ₽</b> / мес</span>
+</div>
+</div>
+
+<div class="donate-card">
+<div class="donate-head">
+<h3 class="donate-name">Delta Force</h3>
+<div class="donate-price">
+<span class="donate-price__main">2000 ₽</span>
+<span class="donate-price__label">навсегда</span>
+</div>
+</div>
+<div class="donate-sub">Максимальная привилегия Events: полный доступ к админ-панели.</div>
+<ul class="donate-features">
+<li>Плашка Delta Force</li>
+<li>Полный доступ к админ-панели</li>
+<li>Цвет роли</li>
+<li>Разноцветный ник и плашка</li>
+<li>Проводить ивенты</li>
+<li>Отдельная роль в Discord</li>
+<li>2 голоса + 2 за свой ивент</li>
+</ul>
+<div class="donate-footer">
+<span class="donate-duration">
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+Навсегда
+</span>
+<span class="donate-monthly">или <b>550 ₽</b> / мес</span>
+</div>
+</div>
+
+<div class="donate-card">
+<div class="donate-head">
+<h3 class="donate-name">Именной префикс</h3>
+<div class="donate-price">
+<span class="donate-price__main">от 500 ₽</span>
+<span class="donate-price__label">навсегда</span>
+</div>
+</div>
+<div class="donate-sub">Индивидуальный префикс рядом с ником.</div>
+<ul class="donate-features">
+<li>Префикс рядом с ником</li>
+<li>Указать: сервер, префикс, цвет</li>
+</ul>
+<div class="donate-footer">
+<span class="donate-duration">
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+Навсегда
+</span>
+<span class="donate-monthly">обычн. <b>500/160</b> · перелив. <b>600/200</b></span>
+</div>
+</div>
+
+<div class="donate-card">
+<div class="donate-head">
+<h3 class="donate-name">Заказ ивента</h3>
+<div class="donate-price">
+<span class="donate-price__main">300 ₽</span>
+<span class="donate-price__label">за ивент</span>
+</div>
+</div>
+<div class="donate-sub">Любой ивент (не нарушающий VSR) в следующем раунде.</div>
+<ul class="donate-features">
+<li>Ивент на выбор в след. раунде</li>
+<li>Без нарушения VSR</li>
+</ul>
+<div class="donate-footer">
+<span class="donate-duration">
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+Разово
+</span>
+<span class="donate-monthly">один ивент — <b>300 ₽</b></span>
+</div>
+</div>
+
 </div>
 <div class="notice" style="margin-top:24px"><span class="notice-icon">i</span><div>Все покупки проводятся через Discord-сервер проекта.</div></div>
 <a href="https://discord.gg/hspYgyrS5U" target="_blank" class="btn btn-primary btn-arrow">Перейти в Discord</a>
 </section>
 
+<!-- DONATE Discord -->
 <section class="page" id="page-donate-discord">
-<div class="hero"><span class="hero-badge">Донат · Discord</span><h1>Донат <em>KL | Discord</em></h1><p>Донат-услуги для Discord-сервера.</p></div>
+<div class="hero"><span class="hero-badge">Донат · Discord</span><h1>Донат <em>KL | Discord</em></h1><p>Донат-услуги для Discord-сервера проекта.</p></div>
 <div class="notice danger"><span class="notice-icon">!</span><div><b>Цены могут изменяться.</b> Возможны скидки и акции. Актуальную информацию по донату всегда уточняйте в <b>Discord-сервере проекта</b>.</div></div>
 <h3 class="subhead">Префиксы — Никнеймы</h3>
 <div class="grid-3">
-<div class="card"><span class="card-tag">Своя роль · 1250 ₽</span><h3>Своя роль</h3><p>Своя роль на Discord-сервере.</p><p style="color:var(--text-3);font-size:12.5px"><b>Ограничение:</b> нельзя роль админов и EM.</p></div>
-<div class="card"><span class="card-tag">Повышение уровня · от 20 ₽</span><h3>Повышение Уровня</h3><p>MEE6 или Juniper — от 20 до 300 000 ₽.</p><ul><li>+100 ур = 105 ₽</li><li>+200 ур = 200 ₽</li></ul></div>
-<div class="card"><span class="card-tag">Свой цвет · 75 ₽</span><h3>Свой цвет</h3><p>HEX-код или цвета радуги.</p></div>
+
+<div class="donate-card">
+<div class="donate-head">
+<h3 class="donate-name">Своя роль</h3>
+<div class="donate-price">
+<span class="donate-price__main">1250 ₽</span>
+<span class="donate-price__label">разово</span>
+</div>
+</div>
+<div class="donate-sub">Своя роль на Discord-сервере проекта.</div>
+<ul class="donate-features">
+<li>Своя роль на сервере</li>
+<li>Ограничение: нельзя роль админов и EM</li>
+</ul>
+<div class="donate-footer">
+<span class="donate-duration">
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+Разово
+</span>
+<span class="donate-monthly">оплата <b>единожды</b></span>
+</div>
+</div>
+
+<div class="donate-card">
+<div class="donate-head">
+<h3 class="donate-name">Повышение Уровня</h3>
+<div class="donate-price">
+<span class="donate-price__main">от 20 ₽</span>
+<span class="donate-price__label">за услугу</span>
+</div>
+</div>
+<div class="donate-sub">Повышение уровня в боте MEE6 или Juniper.</div>
+<ul class="donate-features">
+<li>+100 ур = 105 ₽</li>
+<li>+200 ур = 200 ₽</li>
+<li>Максимум до 300 000 ₽</li>
+</ul>
+<div class="donate-footer">
+<span class="donate-duration">
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+Разово
+</span>
+<span class="donate-monthly">от <b>20 ₽</b> до <b>300 000 ₽</b></span>
+</div>
+</div>
+
+<div class="donate-card">
+<div class="donate-head">
+<h3 class="donate-name">Свой цвет</h3>
+<div class="donate-price">
+<span class="donate-price__main">75 ₽</span>
+<span class="donate-price__label">разово</span>
+</div>
+</div>
+<div class="donate-sub">Свой цвет ника на Discord-сервере.</div>
+<ul class="donate-features">
+<li>HEX-код на выбор</li>
+<li>Или цвета радуги</li>
+</ul>
+<div class="donate-footer">
+<span class="donate-duration">
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+Разово
+</span>
+<span class="donate-monthly">оплата <b>единожды</b></span>
+</div>
+</div>
+
 </div>
 <h3 class="subhead">Реклама</h3>
 <div class="grid-2">
-<div class="card"><span class="card-tag">С пингом · 900 ₽</span><h3>Пост с @here</h3></div>
-<div class="card"><span class="card-tag">Без пинга · от 400 ₽</span><h3>Пост без пинга</h3><p>400-500 ₽ в зависимости от длины.</p></div>
+
+<div class="donate-card">
+<div class="donate-head">
+<h3 class="donate-name">Пост с @here</h3>
+<div class="donate-price">
+<span class="donate-price__main">900 ₽</span>
+<span class="donate-price__label">за пост</span>
+</div>
+</div>
+<div class="donate-sub">Рекламный пост с пингом @here в канале рекламы.</div>
+<ul class="donate-features">
+<li>Пост с пингом @here</li>
+<li>Размещение в канале рекламы</li>
+</ul>
+<div class="donate-footer">
+<span class="donate-duration">
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+Разово
+</span>
+<span class="donate-monthly">один пост — <b>900 ₽</b></span>
+</div>
+</div>
+
+<div class="donate-card">
+<div class="donate-head">
+<h3 class="donate-name">Пост без пинга</h3>
+<div class="donate-price">
+<span class="donate-price__main">от 400 ₽</span>
+<span class="donate-price__label">за пост</span>
+</div>
+</div>
+<div class="donate-sub">Рекламный пост без пинга. Цена зависит от длины.</div>
+<ul class="donate-features">
+<li>Пост без пинга</li>
+<li>400–500 ₽ в зависимости от длины</li>
+</ul>
+<div class="donate-footer">
+<span class="donate-duration">
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+Разово
+</span>
+<span class="donate-monthly">от <b>400 ₽</b> до <b>500 ₽</b></span>
+</div>
+</div>
+
 </div>
 <div class="notice" style="margin-top:16px"><span class="notice-icon">i</span><div>Обращаться к <b>chertilas | Чёрт</b> или с ролью <b>«KL | Коммерческая Деятельность»</b>.</div></div>
 <h4 class="subhead" style="font-size:11px;color:var(--text-4)">Запрещена реклама</h4>
@@ -1662,6 +2651,8 @@ body::before,body::after,.bg-particles span,.bg-hexagons svg,
 'use strict';
 var PAGE_TITLES={
 'about-site':'О сайте',
+'servers':'Серверы KOLIN',
+'faq':'Помощь / FAQ',
 'admin-norules':'KL | NoRules — Администрация',
 'admin-classic':'KL | Classic — Администрация',
 'admin-events':'KL | Events — Команды и ивенты',
@@ -1768,7 +2759,14 @@ menu.classList.remove('open');
 }
 });
 
-/* === ЗВУК === */
+/* FAQ */
+window.toggleFaq=function(btn){
+var item=btn.parentElement;
+item.classList.toggle('open');
+};
+window.toggleFaqByItem=function(item){item.classList.toggle('open')};
+
+/* ЗВУК */
 var audioCtx=null;
 function playSound(type){
 try{
@@ -1875,7 +2873,7 @@ document.documentElement.style.setProperty('--mx',e.clientX+'px');
 document.documentElement.style.setProperty('--my',e.clientY+'px');
 },{passive:true});
 
-/* === КУРСОР === */
+/* КУРСОР */
 (function cursorTrail(){
 var glow=document.getElementById('cursorGlow');
 if(!glow)return;
@@ -1900,7 +2898,7 @@ requestAnimationFrame(loop);
 loop();
 })();
 
-/* === RIPPLE === */
+/* RIPPLE */
 document.addEventListener('click',function(e){
 var ripple=document.createElement('span');
 ripple.className='click-ripple';
@@ -1910,12 +2908,12 @@ ripple.style.width='0';
 ripple.style.height='0';
 document.body.appendChild(ripple);
 setTimeout(function(){ripple.remove()},600);
-if(!e.target.closest('a')&&!e.target.closest('.nav-item')&&!e.target.closest('.btn')&&!e.target.closest('button')){
+if(!e.target.closest('a')&&!e.target.closest('.nav-item')&&!e.target.closest('.btn')&&!e.target.closest('button')&&!e.target.closest('.faq-q')){
 playSound('click');
 }
 });
 
-/* === ЧАСТИЦЫ === */
+/* ЧАСТИЦЫ */
 (function generateParticles(){
 var container=document.getElementById('bgParticles');
 if(!container)return;
@@ -1948,7 +2946,7 @@ if(newCount!==lastCount){lastCount=newCount;makeParticles(newCount);}
 });
 })();
 
-/* === ШЕСТИУГОЛЬНИКИ === */
+/* ШЕСТИУГОЛЬНИКИ */
 (function generateHexagons(){
 var container=document.getElementById('bgHexagons');
 if(!container)return;
@@ -1974,7 +2972,7 @@ var count=window.innerWidth<768?4:8;
 makeHexagons(count);
 })();
 
-/* === СЧЁТЧИКИ === */
+/* СЧЁТЧИКИ */
 (function animatedCounters(){
 var counters=document.querySelectorAll('.stat-num');
 if(!counters.length)return;
